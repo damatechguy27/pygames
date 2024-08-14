@@ -9,9 +9,12 @@ running = True
 pygame.display.set_caption('Space Shooter')
 
 player_image_path = join('resources','player','Ship_LVL_1.png')
+
+#adding player sprites
 player = pygame.image.load(player_image_path)
-player_x = 100
-player_y = 200
+player_width, player_height = 64, 64
+player = pygame.transform.scale(player,(player_width, player_height))
+player_x, player_y = 100, 200
 
 
 #surface 
