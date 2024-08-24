@@ -1,37 +1,21 @@
 import pygame
+import globals
 from os.path import join
+from random import randint, uniform
 from player import player
+from obstacles import meteors
+from projectiles import projectile
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, running, clock, display_surface, game_caption
 
-all_sprites = pygame.sprite.Group()
+globals.init_groups()
+#all_sprites = pygame.sprite.Group()
 
 # creating player object
-player = player(all_sprites)
+player = player(globals.all_sprites)
 
-# Meteors stuff
-# Loading meteor image
-meteor_image_path = join('resources','meteors','meteor1.png')
-# Getting meteor image size
-meteor_image = pygame.image.load(meteor_image_path).convert_alpha()
-meteor_width, meteor_height = 64, 64
-meteor_image_size = pygame.transform.scale(meteor_image,(meteor_width, meteor_height))
-# Getting meteor position
-meteor_x, meteor_y = 100, 200
-# Creating meteor object
-meteor_binding_box = meteor_image_size.get_frect(center=(meteor_x,meteor_y))
-
-
-# Lasers stuff
-# Loading Laser image
-laser_image_path = join('resources','projectiles','Laser_Small.png')
-# Getting meteor image size
-laser_image = pygame.image.load(laser_image_path).convert_alpha()
-laser_width, laser_height = 16, 32
-laser_image_size = pygame.transform.scale(laser_image,(laser_width, laser_height))
-# Getting meteor position
-laser_x, laser_y = 100, 500
-# Creating meteor object
-laser_binding_box = laser_image_size.get_frect(center=(laser_x,laser_y))
+#handles creating the meteor event and has a meteor time to spawn set to every minute
+meteor_event = pygame.event.custom_type()
+pygame.time.set_timer(meteor_event, 500)
 
 
 
@@ -54,16 +38,22 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        
+        #checks to see if meteor event has been triggered
+        if event.type == meteor_event:
+            # handles the creation of the meteors 
+            print("create meteor")
+            met_x, met_y = randint(0,WINDOW_WIDTH), randint(-200, -100)
+            meteors((met_x,met_y),globals.all_sprites)
    
-
-    all_sprites.update(dt)
+    #updates delta tiem for all sprites 
+    globals.all_sprites.update(dt)
     #draw the game
     display_surface.fill('blue')
     display_surface.blit(bg,(bg_x,bg_y))
-    display_surface.blit(laser_image_size,laser_binding_box)
-    display_surface.blit(meteor_image_size,meteor_binding_box)
-     
-    all_sprites.draw(display_surface)
+
+    # handles the drawing of all sprites     
+    globals.all_sprites.draw(display_surface)
     pygame.display.update() 
 
 #End Game
