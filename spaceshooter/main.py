@@ -6,7 +6,7 @@ from player import player
 from obstacles import meteors
 from projectiles import projectile
 import game_collisions
-from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, running, clock, display_surface, game_caption, game_state
+from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, clock, display_surface, game_caption, game_state
 #import importlib
 
 #importlib.reload(globals)
@@ -40,7 +40,6 @@ while not game_state.is_game_over:
     # event loop 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            #running = False
             game_state.end_game()
         
         #checks to see if meteor event has been triggered
