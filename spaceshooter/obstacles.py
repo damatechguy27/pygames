@@ -1,13 +1,15 @@
 import pygame
+import globals
 from os.path import join
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH
 from random import uniform, randint
 #from globals import all_sprites
 
 class meteors(pygame.sprite.Sprite):
-    def __init__(self, position, groups):
-        super().__init__(groups)
+    def __init__(self, position, *groups):
+        super().__init__(*groups)
 
+        
         # Meteors stuff
         # Loading meteor image
         meteor_image_path = join('resources','meteors','meteor1.png')

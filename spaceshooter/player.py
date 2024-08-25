@@ -65,7 +65,7 @@ class player(pygame.sprite.Sprite):
         
         if action_key[pygame.K_SPACE] and self.can_shoot:
             print("Fire")
-            projectile(self.rect.midtop,globals.all_sprites)
+            projectile(self.rect.midtop,(globals.all_sprites,globals.projectile_group))
             self.can_shoot = False
             self.shoot_time = pygame.time.get_ticks()
 
