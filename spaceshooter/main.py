@@ -9,10 +9,13 @@ import game_collisions
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, clock, display_surface
 from general_settings import game_caption, game_state, GameScore, HUD_boarder_height, UI
 from general_settings import GameLives
+from resources import bg_music
 #import importlib
 
 #importlib.reload(globals)
 globals.init_groups()
+bg_music.play(loops=-1)
+
 #all_sprites = pygame.sprite.Group()
 
 #creating UI 
@@ -55,7 +58,7 @@ while not game_state.is_game_over:
         if event.type == meteor_event:
             # handles the creation of the meteors 
             #print("create meteor")
-            met_x, met_y = randint(0,WINDOW_WIDTH), randint(-200, -100)
+            met_x, met_y = randint(500,WINDOW_WIDTH), randint(-200, -100)
             # create meteor and add it to all sprite and meteor group
             meteors((met_x,met_y),(globals.all_sprites, globals.meteor_group))
    

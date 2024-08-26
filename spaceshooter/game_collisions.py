@@ -8,7 +8,7 @@ from projectiles import projectile
 from general_settings import game_state, GameScore
 import animations
 from animations import explosions
-
+import resources
 def collisions():
     # Collisions
 
@@ -25,4 +25,5 @@ def collisions():
     #if collide_projectile:
         GameScore.increase_score()
         explosion = explosions(collide.rect.midtop, (globals.all_sprites, globals.explosions))
+        resources.explosion_snd.play()
         print("explode")

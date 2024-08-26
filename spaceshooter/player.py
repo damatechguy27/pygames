@@ -4,6 +4,7 @@ import globals
 from os.path import join
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH
 from projectiles import projectile
+import resources
 
 
 class player(pygame.sprite.Sprite):
@@ -65,6 +66,7 @@ class player(pygame.sprite.Sprite):
         if action_key[pygame.K_SPACE] and self.can_shoot:
             print("Fire")
             projectile(self.rect.midtop,(globals.all_sprites,globals.projectile_group))
+            resources.laser_snd.play()
             self.can_shoot = False
             self.shoot_time = pygame.time.get_ticks()
 
