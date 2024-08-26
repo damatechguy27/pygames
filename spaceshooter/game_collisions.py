@@ -26,4 +26,4 @@ def collisions():
         GameScore.increase_score()
         explosion = explosions(collide.rect.midtop, (globals.all_sprites, globals.explosions))
         resources.explosion_snd.play()
-        print("explode")
+       # print("explode")

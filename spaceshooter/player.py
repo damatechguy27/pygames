@@ -64,7 +64,7 @@ class player(pygame.sprite.Sprite):
 
         
         if action_key[pygame.K_SPACE] and self.can_shoot:
-            print("Fire")
+            #print("Fire")
             projectile(self.rect.midtop,(globals.all_sprites,globals.projectile_group))
             resources.laser_snd.play()
             self.can_shoot = False
