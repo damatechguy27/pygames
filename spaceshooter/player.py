@@ -20,21 +20,20 @@ class player(pygame.sprite.Sprite):
         # Getting player position
         player_x, player_y = WINDOW_WIDTH/2, WINDOW_HEIGHT/2
         # Creating player object
-        #player_binding_box = player_image_size.get_frect(center=(player_x,player_y))
         # player movement 
         self.direction= pygame.math.Vector2()
         self.speed = 300
-        
-        #self.laser = projectile()
-        #self.laser_proj = laser_image_size
-        
+                
         self.image = player_image_size
         self.rect = self.image.get_frect(center=(player_x,player_y))
     
+        # creating player mask
+        self.mask = pygame.mask.from_surface(self.image)
 
+        #checks how often with can fire a bullet 
         self.can_shoot = True 
         self.shoot_time = 0
-        self.cooldown_duration = 300 
+        self.cooldown_duration = 200 
 
 
         # # Lasers stuff

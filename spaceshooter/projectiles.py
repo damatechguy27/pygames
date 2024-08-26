@@ -31,6 +31,7 @@ class projectile(pygame.sprite.Sprite):
 
         self.image = laser_image_size
         self.rect = self.image.get_frect(midbottom = position)
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt):
         #moves projectile

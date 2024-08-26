@@ -6,12 +6,17 @@ from player import player
 from obstacles import meteors
 from projectiles import projectile
 import game_collisions
-from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, clock, display_surface, game_caption, game_state
+from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, clock, display_surface
+from general_settings import game_caption, game_state, GameScore, HUD_boarder_height, UI
+from general_settings import GameLives
 #import importlib
 
 #importlib.reload(globals)
 globals.init_groups()
 #all_sprites = pygame.sprite.Group()
+
+#creating UI 
+ui = UI(WINDOW_WIDTH,WINDOW_HEIGHT+0,HUD_boarder_height)
 
 # creating player object
 player = player((globals.all_sprites,globals.players_group))
@@ -20,11 +25,15 @@ player = player((globals.all_sprites,globals.players_group))
 meteor_event = pygame.event.custom_type()
 pygame.time.set_timer(meteor_event, 500)
 
-
-
 #surface 
 surf = pygame.Surface((100,200))
-surf.fill("yellow")
+surf.fill("black")
+
+
+# checking to see pygame finds all animation sprites 
+#explosions_frames = [pygame.image.load(join('resources','explosions',f'Explosion0{i}.png')).convert_alpha() for i in range(9)]
+#explosions_image = pygame.image.load(explosions_frames)
+#print(explosions_frames)
 
 #background 
 bg_image_path = join('resources','background','Background.png')
@@ -58,11 +67,17 @@ while not game_state.is_game_over:
 
       
     #draw the game
-    display_surface.fill('blue')
     display_surface.blit(bg,(bg_x,bg_y))
 
     # handles the drawing of all sprites     
     globals.all_sprites.draw(display_surface)
+    #display_surface.blit(font_display,(200,100))
+
+    
+    #display_HUD.fill('blue')
+    ui.draw(display_surface)
+    GameScore.display_score()
+    GameLives.display_lives()
     pygame.display.update() 
 
 #End Game
