@@ -3,7 +3,7 @@ import globals
 from os.path import join
 from random import randint, uniform
 from player import player
-from obstacles import meteors
+from obstacles import meteors, smallMeteor, MediumMeteor, LargeMeteor, create_meteor
 from projectiles import projectile
 import game_collisions
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, clock, display_surface
@@ -26,7 +26,16 @@ player = player((globals.all_sprites,globals.players_group))
 
 #handles creating the meteor event and has a meteor time to spawn set to every minute
 meteor_event = pygame.event.custom_type()
-pygame.time.set_timer(meteor_event, 500)
+meteor_spawn_time = 1000
+pygame.time.set_timer(meteor_event, meteor_spawn_time)
+
+#handles the waves 
+wave_event = pygame.event.custom_type()
+wave_time = 30000
+pygame.time.set_timer(wave_event, wave_time)
+
+wave_counter = 1 
+difficulty_increase = 100
 
 #surface 
 surf = pygame.Surface((100,200))
@@ -56,12 +65,23 @@ while not game_state.is_game_over:
         
         #checks to see if meteor event has been triggered
         if event.type == meteor_event:
-            # handles the creation of the meteors 
-            #print("create meteor")
-            met_x, met_y = randint(500,WINDOW_WIDTH), randint(-200, -100)
-            # create meteor and add it to all sprite and meteor group
-            meteors((met_x,met_y),(globals.all_sprites, globals.meteor_group))
-   
+        #     # handles the creation of the meteors 
+        #     #print("create meteor")
+             met_x, met_y = randint(500,750), randint(-200, -100)
+             create_meteor((met_x,met_y),(globals.all_sprites, globals.meteor_group))
+        
+        if event.type == wave_event:
+            #increase wave count by 1 
+            wave_counter += 1
+
+            #decreases the wave by decreasing the meteor spawn time by 100
+            meteor_spawn_time = max(100, meteor_spawn_time - difficulty_increase)
+
+            #met_x, met_y = randint(500,750), randint(-200, -100)
+            pygame.time.set_timer(meteor_event, meteor_spawn_time)
+
+            #prints the wave number out 
+            print(f"Wave {wave_counter} started! Meteor spawn time: {meteor_spawn_time}ms")
    #adding collisions 
     game_collisions.collisions() 
 

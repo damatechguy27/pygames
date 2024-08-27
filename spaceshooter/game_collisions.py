@@ -20,10 +20,11 @@ def collisions():
         print("Loser!!!!")
     
     # check if laser collides with meteor
-    collide_projectile = pygame.sprite.groupcollide(globals.projectile_group, globals.meteor_group, True, True, pygame.sprite.collide_mask)
-    for collide in collide_projectile:
-    #if collide_projectile:
-        GameScore.increase_score()
-        explosion = explosions(collide.rect.midtop, (globals.all_sprites, globals.explosions))
-        resources.explosion_snd.play()
-       # print("explode")
+    collide_projectile = pygame.sprite.groupcollide(globals.meteor_group, globals.projectile_group , False, True)
+    for meteor in collide_projectile:
+        if meteor.meteorhit():
+            meteor.kill()
+            GameScore.increase_score(meteor.point_value)
+            explosion = explosions(meteor.rect.midtop, (globals.all_sprites, globals.explosions))
+            resources.explosion_snd.play()
+        # print("explode")

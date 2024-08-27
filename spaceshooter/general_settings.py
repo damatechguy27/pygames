@@ -29,7 +29,7 @@ class score:
         #self.current_time = pygame.time.get_ticks() // 100
 
     # Increase score
-    def increase_score(self, amount=1):
+    def increase_score(self, amount):
         self.game_score += amount
 
     def display_score(self):
