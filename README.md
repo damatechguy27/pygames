@@ -11,16 +11,20 @@ controls
 
 What's being added next?
 - adding a wave system so that as the player continues to survive 
-  in the game it becomes more diffcult to dodge the meteors
+  in the game it becomes more diffcult to dodge the meteors (Completed)
 
 - Right now there is nothing stopping the player from leaving the game screen
   and going outside of the windows boarders or going over the HUD interface 
   where the Lives and score is. So going to implement a border so that player cannot 
-  leave the screen of be over the HUD.
+  leave the screen of be over the HUD. (Completed)
 
 - Adding more meteors adding more difficulty to the game by adding different types
   of meteors bigger and smaller sizes to where the bigger the meteor the more bullets it 
-  takes to destroy.
+  takes to destroy. (Completed)
+
+- Adding Win and Lose Conditions 
+
+- having player respawn after dying instead of game exiting
 
 - Optional - this is only if I feel like its needed a power upgrade system where there
   will be 3 levels of upgrades for the bullets or 2 types of bullets and both has 3 levels
