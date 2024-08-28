@@ -19,15 +19,16 @@ class player(pygame.sprite.Sprite):
         player_width, player_height = 64, 64
         player_image_size = pygame.transform.scale(player_image,(player_width, player_height))
         # Getting player position
-        player_x, player_y = WINDOW_WIDTH/2, WINDOW_HEIGHT/2
+        player_x, player_y = WINDOW_WIDTH/2, WINDOW_HEIGHT-120
         # Creating player object
         # player movement 
         self.direction= pygame.math.Vector2()
         self.speed = 300
+        self.inital_position = (player_x, player_y)
                 
         self.image = player_image_size
         self.rect = self.image.get_frect(center=(player_x,player_y))
-    
+        self.original_image = self.image.copy()
         # creating player mask
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -53,6 +54,14 @@ class player(pygame.sprite.Sprite):
             if current_time - self.shoot_time >= self.cooldown_duration:
                 self.can_shoot = True
     
+    def reset_position(self):
+        self.rect.center = (WINDOW_WIDTH/2, WINDOW_HEIGHT-200)
+
+    #changes the opacity when player dies 
+    def set_opacity(self, opacity):
+            self.image = self.original_image.copy()
+            self.image.set_alpha(opacity)
+
     def update(self,dt):
         # Getting Input 
         movement_key = pygame.key.get_pressed()  

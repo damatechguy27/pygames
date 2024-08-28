@@ -32,6 +32,10 @@ class score:
     def increase_score(self, amount):
         self.game_score += amount
 
+    # resets score back to 0 
+    def reset_score(self):
+        self.game_score = 0
+
     def display_score(self):
         comic_shark_font = join('resources','font','Comic Shark.ttf')
         cod_font = join('resources','font','CallOfOpsDutyIi-7Bgm4.ttf')
@@ -46,14 +50,31 @@ GameScore = score()
 class lives:
     def __init__(self):
         self.player_lives = 3
+        self.respawn_timer = 0
+        self.is_respawning = False
 
     # Increase lives
     def increase_lives(self, amount=1):
         self.player_lives += amount
 
     # decrease lives
-    def decrease_lives(self, amount=1):
+    def decrease_lives(self, amount=1):    
         self.player_lives -= amount
+        if self.player_lives < 0:
+            self.player_lives = -1
+    
+    def start_respawning(self):
+        self.is_respawning = True
+        self.respawn_timer = 5 * 60
+
+
+    def update(self):
+        if self.is_respawning:
+            self.respawn_timer -= 1
+            if self.respawn_timer <= 0:
+                self.is_respawning = False
+                return True
+            return False
 
 
     def display_lives(self):
