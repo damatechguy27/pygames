@@ -22,9 +22,11 @@ What's being added next?
   of meteors bigger and smaller sizes to where the bigger the meteor the more bullets it 
   takes to destroy. (Completed)
 
-- Adding Win and Lose Conditions 
+- Adding Win and Lose Conditions (Completed)
 
-- having player respawn after dying instead of game exiting
+- having player respawn after dying instead of game exiting game (Completed)
+
+- added scrolling background (Completed)
 
 - Optional - this is only if I feel like its needed a power upgrade system where there
   will be 3 levels of upgrades for the bullets or 2 types of bullets and both has 3 levels
