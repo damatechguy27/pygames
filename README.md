@@ -36,4 +36,8 @@ What's being added next?
 
 
 To see video of game click here 
+Game update 8/27/2024
 https://app.screencast.com/v7dYxJs3ktt0V
+
+Game update 8/28/2024
+https://app.screencast.com/JVu5bCB8ST7bn
