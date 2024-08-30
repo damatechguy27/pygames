@@ -75,7 +75,7 @@ class smallMeteor(meteors):
         meteor_image_size = pygame.transform.scale(meteor_image,(meteor_width, meteor_height))
 
         self.hitpoint = 1
-        self.point_value = 1
+        self.point_value = 100
         self.image = meteor_image_size
         self.rect = self.image.get_frect(center = position)
         self.mask = pygame.mask.from_surface(self.image)
@@ -97,8 +97,8 @@ class MediumMeteor(meteors):
         meteor_width, meteor_height = 76, 72
         meteor_image_size = pygame.transform.scale(meteor_image,(meteor_width, meteor_height))
 
-        self.hitpoint = 2
-        self.point_value = 2
+        self.hitpoint = 4
+        self.point_value = 200
         self.image = meteor_image_size
         self.rect = self.image.get_frect(center = position)
         self.mask = pygame.mask.from_surface(self.image)
@@ -119,8 +119,8 @@ class LargeMeteor(meteors):
         meteor_width, meteor_height = 88, 72
         meteor_image_size = pygame.transform.scale(meteor_image,(meteor_width, meteor_height))
 
-        self.hitpoint = 3
-        self.point_value = 3
+        self.hitpoint = 4
+        self.point_value = 500
         self.image = meteor_image_size
         self.rect = self.image.get_frect(center = position)
         self.mask = pygame.mask.from_surface(self.image)

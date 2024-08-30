@@ -10,6 +10,7 @@ from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH, clock, display_surface
 from general_settings import game_caption, game_state, GameScore, HUD_boarder_height, UI
 from general_settings import GameLives
 from resources import bg_music
+from powerups import PowerUp
 #import importlib
 
 #importlib.reload(globals)
@@ -31,6 +32,11 @@ def update_background(dt):
     # If the bottom of the second background has moved below the screen
     if bg_y2 > WINDOW_HEIGHT:
         bg_y2 = bg_y1 - bg_height
+
+
+# Powerup # Power-up spawn timer
+powerup_spawn_timer = 0
+powerup_spawn_interval = 15  # seconds
 
 
 def display_loss():
@@ -124,7 +130,7 @@ while not game_state.is_game_over:
         if event.type == meteor_event:
         #     # handles the creation of the meteors 
         #     #print("create meteor")
-             met_x, met_y = randint(500,750), randint(-200, -100)
+             met_x, met_y = randint(100,1100), randint(-200, -100)
              create_meteor((met_x,met_y),(globals.all_sprites, globals.meteor_group))
         
         if event.type == wave_event:
@@ -176,7 +182,15 @@ while not game_state.is_game_over:
                         else:
                             sprite.update()
 
+
         #print(GameLives.is_respawning)
+        powerup_spawn_timer += dt
+        if powerup_spawn_timer >= powerup_spawn_interval:
+            powerup_x, powerup_y= randint(500,750), randint(-200, -100)
+            PowerUp((powerup_x, powerup_y),(globals.all_sprites, globals.powerups))
+            powerup_spawn_timer = 0
+
+
         #adding collisions 
         game_collisions.collisions() 
         #draw the game

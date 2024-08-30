@@ -36,3 +36,11 @@ def collisions():
             explosion = explosions(meteor.rect.midtop, (globals.all_sprites, globals.explosions))
             resources.explosion_snd.play()
         # print("explode")
+
+ # Check for collisions between player and power-ups
+    powerup_collisions = pygame.sprite.groupcollide(globals.players_group, globals.powerups, False, True)
+
+    for powerup in powerup_collisions:
+        for player in powerup_collisions:
+            player.upgrade()
+

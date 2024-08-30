@@ -2,7 +2,7 @@ import pygame
 import globals
 from os.path import join
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH
-
+import math
 #projectiles =[]
 
 # Lasers stuff
@@ -18,7 +18,7 @@ from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH
 
 
 class projectile(pygame.sprite.Sprite):
-    def __init__(self, position, groups):
+    def __init__(self, position, angle, groups):
         super().__init__(groups)
 
         # Lasers stuff
@@ -32,10 +32,15 @@ class projectile(pygame.sprite.Sprite):
         self.image = laser_image_size
         self.rect = self.image.get_frect(midbottom = position)
         self.mask = pygame.mask.from_surface(self.image)
-
+        self.angle = math.radians(angle)  # Convert to radians
+        self.speed = 500
     def update(self, dt):
         #moves projectile
-        self.rect.centery -= 400 * dt 
+        #self.rect.centery -= 400 * dt 
+        
+
+        self.rect.x += math.sin(self.angle) * self.speed * dt
+        self.rect.y -= math.cos(self.angle) * self.speed * dt
 
         # destroy projectile if outside windows
         if self.rect.bottom <0:

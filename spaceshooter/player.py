@@ -35,9 +35,9 @@ class player(pygame.sprite.Sprite):
         #checks how often with can fire a bullet 
         self.can_shoot = True 
         self.shoot_time = 0
-        self.cooldown_duration = 100 
+        self.cooldown_duration = 200 
 
-
+        self.upgrade_level = 0
         # # Lasers stuff
         # # Loading Laser image
         # laser_image_path = join('resources','projectiles','Laser_Small.png')
@@ -45,6 +45,47 @@ class player(pygame.sprite.Sprite):
         # laser_image = pygame.image.load(laser_image_path).convert_alpha()
         # laser_width, laser_height = 16, 32
         # self.laser_image_size = pygame.transform.scale(laser_image,(laser_width, laser_height))
+
+#####################################################
+#  POWER UPGRADES 
+#####################################################
+    def shoot(self, groups):
+        if self.shoot_cooldown <= 0:
+            if self.upgrade_level == 0:
+                self._shoot_single(groups)
+            elif self.upgrade_level == 1:
+                self._shoot_double(groups)
+            elif self.upgrade_level == 2:
+                self._shoot_triple(groups)
+            else:
+                self._shoot_six(groups)
+            self.shoot_cooldown = self.shoot_delay
+
+    def _shoot_single(self, groups):
+        projectile(self.rect.midtop, 0, groups)
+
+    def _shoot_double(self, groups):
+        projectile(self.rect.midtop, 0, groups)
+        projectile((self.rect.left, self.rect.top), 0, groups)
+
+    def _shoot_triple(self, groups):
+        projectile(self.rect.midtop, 0, groups)
+        projectile((self.rect.left, self.rect.top), -15, groups)
+        projectile((self.rect.right, self.rect.top), 15, groups)
+
+    def _shoot_six(self, groups):
+        projectile(self.rect.midtop, 0, groups)
+        projectile((self.rect.midtop[0] + 10, self.rect.midtop[1]), 0, groups)
+        projectile((self.rect.left, self.rect.top), -15, groups)
+        projectile((self.rect.left + 10, self.rect.top), -15, groups)
+        projectile((self.rect.right, self.rect.top), 15, groups)
+        projectile((self.rect.right - 10, self.rect.top), 15, groups)
+
+    def upgrade(self):
+        if self.upgrade_level < 3:
+            self.upgrade_level += 1
+
+###########################################################################
 
 
     def shot_timer(self):
@@ -85,9 +126,30 @@ class player(pygame.sprite.Sprite):
 
         if action_key[pygame.K_SPACE] and self.can_shoot:
             #print("Fire")
-            projectile(self.rect.midtop,(globals.all_sprites,globals.projectile_group))
-            resources.laser_snd.play()
-            self.can_shoot = False
+            # projectile(self.rect.midtop,(globals.all_sprites,globals.projectile_group))
+            # resources.laser_snd.play()
+            # self.can_shoot = False
+            # self.shoot_time = pygame.time.get_ticks()
+
+
+            if self.upgrade_level == 0:
+                self._shoot_single((globals.all_sprites,globals.projectile_group))
+                resources.laser_snd.play()
+                self.can_shoot = False
+                self.shoot_time = pygame.time.get_ticks()
+            elif self.upgrade_level == 1:
+                self._shoot_double((globals.all_sprites,globals.projectile_group))
+                self.can_shoot = False
+                self.shoot_time = pygame.time.get_ticks()
+            elif self.upgrade_level == 2:
+                self._shoot_triple((globals.all_sprites,globals.projectile_group))
+                self.can_shoot = False
+                self.shoot_time = pygame.time.get_ticks()
+            else:
+                self._shoot_six((globals.all_sprites,globals.projectile_group))
+                self.can_shoot = False
+                self.shoot_time = pygame.time.get_ticks()
+            #self.shoot_cooldown = self.shoot_delay
             self.shoot_time = pygame.time.get_ticks()
 
         self.shot_timer()
