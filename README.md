@@ -30,7 +30,7 @@ What's being added next?
 
 - Optional - this is only if I feel like its needed a power upgrade system where there
   will be 3 levels of upgrades for the bullets or 2 types of bullets and both has 3 levels
-  of upgrades, but will depend on how many waves I add or if I decide to added more levels
+  of upgrades, but will depend on how many waves I add or if I decide to added more levels (Completed)
 
 - Optional - adding a splash screen and main menu
 
