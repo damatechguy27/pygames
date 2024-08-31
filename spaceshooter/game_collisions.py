@@ -21,7 +21,9 @@ def collisions():
         for player in collide_meteor:
             explosion = explosions(player.rect.midtop, (globals.all_sprites, globals.explosions))
             player.set_opacity(128)
+            player.reset_upgrade()
             player.reset_position()
+            resources.explosion_snd.play()
         # Pause meteors and wave timer
         globals.pause_meteors_and_waves()
         #game_state.end_game()
@@ -43,4 +45,5 @@ def collisions():
     for powerup in powerup_collisions:
         for player in powerup_collisions:
             player.upgrade()
+            resources.upgrade_snd.play()
 

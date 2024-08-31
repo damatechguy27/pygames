@@ -105,16 +105,29 @@ scroll_spd = 50
 # Load loss screen image
 loss_screen_path = join('resources', 'screens', 'loss_screen.jpg')
 loss_screen_image = pygame.image.load(loss_screen_path)
-loss_screen_image = pygame.transform.scale(loss_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+loss_screen_image_size = pygame.transform.scale(loss_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 # Load Win screen image
 win_screen_path = join('resources', 'screens', 'win_screen.jpg')
 win_screen_image = pygame.image.load(win_screen_path)
-win_screen_image = pygame.transform.scale(win_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+win_screen_image_size = pygame.transform.scale(win_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
+# Load MAIN MENU screen image
+menu_screen_path = join('resources', 'screens', 'menu_screen.jpg')
+menu_screen_image = pygame.image.load(menu_screen_path)
+menu_screen_image_size = pygame.transform.scale(menu_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
+
+# Load STORY MENU screen image
+story_screen_path = join('resources', 'screens', 'story_screen.jpg')
+story_screen_image = pygame.image.load(story_screen_path)
+story_screen_image_size = pygame.transform.scale(story_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 # checking for if player has won or lost the game 
 GAMEOVER = False
 GAMEWON = False
+MAIN_MENU = True
+STORY_SCENE = False
 
 while not game_state.is_game_over:
     dt=clock.tick()/1000
@@ -157,6 +170,14 @@ while not game_state.is_game_over:
     #     for sprite in globals.all_sprites:
     #         if sprite != globals.players_group.sprites and globals.projectile_group.sprites:
     #             sprite.update()
+
+    # if STORY_SCENE:
+    #     display_surface.blit(story_screen_image_size, (0, 0))
+    #     # Check if 5 seconds have passed
+    #     display_loss()
+    #     if pygame.time.get_ticks() - loss_start_time > 5000:  # 5000 ms = 5 seconds
+    #         game_state.end_game()
+
     if not GAMEOVER and not GAMEWON:
     # Update game objects
         respawn_complete = GameLives.update()
@@ -226,14 +247,14 @@ while not game_state.is_game_over:
 
 
     elif GAMEOVER:
-        display_surface.blit(loss_screen_image, (0, 0))
+        display_surface.blit(loss_screen_image_size, (0, 0))
         # Check if 5 seconds have passed
         display_loss()
         if pygame.time.get_ticks() - loss_start_time > 5000:  # 5000 ms = 5 seconds
             game_state.end_game()
 
     elif GAMEWON:
-        display_surface.blit(win_screen_image, (0, 0))
+        display_surface.blit(win_screen_image_size, (0, 0))
                 # Check if 5 seconds have passed
         display_win()
         if pygame.time.get_ticks() - win_start_time > 5000:  # 5000 ms = 5 seconds

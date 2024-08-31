@@ -81,6 +81,9 @@ class player(pygame.sprite.Sprite):
         projectile((self.rect.right, self.rect.top), 15, groups)
         projectile((self.rect.right - 10, self.rect.top), 15, groups)
 
+    def reset_upgrade(self):
+        self.upgrade_level = 0
+
     def upgrade(self):
         if self.upgrade_level < 3:
             self.upgrade_level += 1
@@ -139,14 +142,17 @@ class player(pygame.sprite.Sprite):
                 self.shoot_time = pygame.time.get_ticks()
             elif self.upgrade_level == 1:
                 self._shoot_double((globals.all_sprites,globals.projectile_group))
+                resources.laser_snd.play()
                 self.can_shoot = False
                 self.shoot_time = pygame.time.get_ticks()
             elif self.upgrade_level == 2:
                 self._shoot_triple((globals.all_sprites,globals.projectile_group))
+                resources.laser_snd.play()
                 self.can_shoot = False
                 self.shoot_time = pygame.time.get_ticks()
             else:
                 self._shoot_six((globals.all_sprites,globals.projectile_group))
+                resources.laser_snd.play()
                 self.can_shoot = False
                 self.shoot_time = pygame.time.get_ticks()
             #self.shoot_cooldown = self.shoot_delay
