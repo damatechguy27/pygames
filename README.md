@@ -36,6 +36,7 @@ What's being added next?
 
 - Doing final touch ups on game will add final gameplay video of game in future release
 
+- added storyline into game (Completed)
 
 To see video of game click here 
 Game update 8/26/2024
@@ -43,3 +44,6 @@ https://app.screencast.com/v7dYxJs3ktt0V
 
 Game update 8/28/2024
 https://app.screencast.com/JVu5bCB8ST7bn
+
+Game Update 9/1/2024
+https://app.screencast.com/qH2nbGLLjNdZu
