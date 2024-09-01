@@ -13,21 +13,21 @@ class GameState:
     def __init__(self):
         self.is_game_over = False
         self.is_main_menu = True
-        self.is_options = False
+        self.is_story = False
         self.is_game = False
 
     def on_main_menu(self):
         self.is_main_menu = True
         self.is_game = False
-        self.is_options = False
+        self.is_story = False
         
     def on_game(self):
         self.is_game = True
         self.is_main_menu = False
-        self.is_options = False
+        self.is_story = False
         
-    def on_options(self):
-        self.is_options = True
+    def on_story(self):
+        self.is_story = True
         self.is_main_menu = False
         self.is_game =False
     def end_game(self):

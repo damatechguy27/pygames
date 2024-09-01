@@ -16,8 +16,7 @@ class PowerUp(pygame.sprite.Sprite):
         #self.rect = self.image.get_frect()
         self.mask = pygame.mask.from_surface(self.image)
         
-        #self.rect.x = randint(0, 800 - self.rect.width)
-        #self.rect.y = -self.rect.height
+
         self.rect = self.image.get_frect(center=position)
         self.speed = 100  # pixels per second
 
@@ -26,10 +25,6 @@ class PowerUp(pygame.sprite.Sprite):
     def update(self, dt):
         #self.rect.y += self.speed * dt
         self.rect.centery += 400 * dt
-        # Spawn power-up
-        # self.powerup_spawn_timer += dt
-        # if self.powerup_spawn_timer >= self.powerup_spawn_interval:
-        #     PowerUp((globals.all_sprites, globals.powerups))
-        #     powerup_spawn_timer = 0
+ 
         if self.rect.top > 600:  # Adjust based on your screen height
             self.kill()

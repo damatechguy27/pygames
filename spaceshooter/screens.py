@@ -14,6 +14,7 @@ import resources
 from powerups import PowerUp
 from buttons import Button
 import sys
+
 pygame.mixer.init()
 #bg_music.play(loops=-1)
 globals.init_groups()
@@ -69,26 +70,7 @@ scroll_spd = 50
 menu_screen_path = join('resources', 'screens', 'menu_screen.jpg')
 menu_screen_image = pygame.image.load(menu_screen_path)
 menu_screen_image_size = pygame.transform.scale(menu_screen_image, (WINDOW_WIDTH, WINDOW_HEIGHT))
-
-# def create_game_objects():
-#     global player
-#     player = Player((globals.all_sprites, globals.players_group))
-#     # Initialize other game objects here if needed
-# creating player object
-
-
-# def reset_game():
-#     player = players((globals.all_sprites,globals.players_group))
-#     wave_counter = 1
-#     meteor_spawn_time = 1000
-#     powerup_spawn_timer = 0
-#     player.reset_upgrade()
-#     GameScore.reset_score()
-#     GameLives.reset_lives()
-#     player.reset_position()
-    
-
-
+   
 
 def main_menu():
     def display_menu_text():
@@ -111,8 +93,8 @@ def main_menu():
                 mousepos = pygame.mouse.get_pos()
                 if play_button.rect.collidepoint(event.pos):
                     
-                    game_state.on_game()
-                    game_screen()
+                    game_state.on_story()
+                    story_screen()
                 elif quit_button.rect.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
@@ -128,6 +110,44 @@ def main_menu():
         
         
         display_surface.blit(quit_button.image, quit_button.rect)
+        pygame.display.update()
+    pygame.quit()
+    sys.exit()
+
+def story_screen():
+    game_time = pygame.time.get_ticks()
+    resources.story_music_snd.play()
+    def display_story_text():
+        comic_shark_font = join('resources','font','Comic Shark.ttf')
+        cod_font = join('resources','font','CallOfOpsDutyIi-7Bgm4.ttf')
+        font = pygame.font.Font(cod_font,70)
+        font2 = pygame.font.Font(cod_font,50)
+        font_display = font.render(f"MISSION BRIEFING", True, (230,186,42))
+        font_display2 = font2.render(f"From President: Jonathan Benedick", True, (230,186,42))
+        display_surface.blit(font_display,(WINDOW_WIDTH/4,WINDOW_HEIGHT-450))
+        display_surface.blit(font_display2,(WINDOW_WIDTH/4,WINDOW_HEIGHT-350))
+
+        
+    while game_state.is_story:    
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        display_surface.fill((0,0,0))
+
+        display_surface.blit(resources.story_screen_image_size,resources.story_rect)
+
+        
+
+        display_story_text()
+
+        if pygame.time.get_ticks() - game_time > 54000:  # = 54 seconds
+            game_state.on_game()
+            game_screen()
+
+        
+        
         pygame.display.update()
     pygame.quit()
     sys.exit()
