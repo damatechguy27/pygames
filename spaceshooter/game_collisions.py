@@ -2,7 +2,7 @@ import pygame
 import globals
 from os.path import join
 from random import randint, uniform
-from player import player
+from player import players
 from obstacles import meteors
 from projectiles import projectile
 from general_settings import game_state, GameScore, GameLives
@@ -26,8 +26,7 @@ def collisions():
             resources.explosion_snd.play()
         # Pause meteors and wave timer
         globals.pause_meteors_and_waves()
-        #game_state.end_game()
-        #print("Loser!!!!")
+        
     
     # check if laser collides with meteor
     collide_projectile = pygame.sprite.groupcollide(globals.meteor_group, globals.projectile_group , False, True)

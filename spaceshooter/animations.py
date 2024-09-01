@@ -2,7 +2,7 @@ import pygame
 import globals
 from os.path import join
 from random import randint, uniform
-from player import player
+from player import players
 from obstacles import meteors
 from projectiles import projectile
 

@@ -2,7 +2,6 @@ import pygame
 from os.path import join
 
 # general setup
-pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 game_caption = pygame.display.set_caption('Space Shooter')
@@ -13,7 +12,24 @@ clock = pygame.time.Clock()
 class GameState:
     def __init__(self):
         self.is_game_over = False
+        self.is_main_menu = True
+        self.is_options = False
+        self.is_game = False
 
+    def on_main_menu(self):
+        self.is_main_menu = True
+        self.is_game = False
+        self.is_options = False
+        
+    def on_game(self):
+        self.is_game = True
+        self.is_main_menu = False
+        self.is_options = False
+        
+    def on_options(self):
+        self.is_options = True
+        self.is_main_menu = False
+        self.is_game =False
     def end_game(self):
         self.is_game_over = True
 
@@ -67,6 +83,8 @@ class lives:
         self.is_respawning = True
         self.respawn_timer = 5 * 60
 
+    def reset_lives(self):
+        self.player_lives = 3
 
     def update(self):
         if self.is_respawning:
