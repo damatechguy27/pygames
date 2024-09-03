@@ -80,7 +80,7 @@ def main_menu():
         font_display = font.render(f"Space Fighter X", True, (255,251,0))
         display_surface.blit(font_display,(WINDOW_WIDTH/1.6,WINDOW_HEIGHT-120))
 
-
+    bg_music.stop()
     play_button = Button(resources.play_screen_path,(128,64),(WINDOW_WIDTH/2,WINDOW_HEIGHT-500))
     quit_button = Button(resources.quit_screen_path,(128,64),(WINDOW_WIDTH/2,WINDOW_HEIGHT-400))
     while game_state.is_main_menu:    
@@ -95,6 +95,11 @@ def main_menu():
                     
                     game_state.on_story()
                     story_screen()
+
+                # testing
+                    # game_state.on_game()
+                    # game_screen()
+
                 elif quit_button.rect.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
@@ -154,7 +159,8 @@ def story_screen():
 
 
 def game_screen():
-    player = players((globals.all_sprites,globals.players_group))
+    player = players(resources.player_image_path,64,64,(globals.all_sprites,globals.players_group))
+    
     wave_counter = 10
     meteor_spawn_time = 100
     powerup_spawn_timer = 0
@@ -273,7 +279,7 @@ def game_screen():
             powerup_spawn_timer += dt
             if powerup_spawn_timer >= powerup_spawn_interval:
                 powerup_x, powerup_y= randint(500,750), randint(-200, -100)
-                PowerUp((powerup_x, powerup_y),(globals.all_sprites, globals.powerups))
+                PowerUp(resources.powerup_image_path,48,30,(powerup_x, powerup_y),(globals.all_sprites, globals.powerups))
                 powerup_spawn_timer = 0
 
 

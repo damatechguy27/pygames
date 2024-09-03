@@ -8,16 +8,15 @@ import resources
 
 
 class players(pygame.sprite.Sprite):
-    def __init__(self, groups):
+    def __init__(self, image_path, image_width, image_height, groups):
         super().__init__(groups)
         
         # Adding player sprites
         # Loading player image
-        player_image_path = join('resources','player','PlayerRed.png')
+        player_image_path = image_path
         # Getting player image size
         player_image = pygame.image.load(player_image_path).convert_alpha()
-        player_width, player_height = 64, 64
-        player_image_size = pygame.transform.scale(player_image,(player_width, player_height))
+        player_image_size = pygame.transform.scale(player_image,(image_width, image_height))
         # Getting player position
         player_x, player_y = WINDOW_WIDTH/2, WINDOW_HEIGHT-120
         # Creating player object
@@ -62,24 +61,24 @@ class players(pygame.sprite.Sprite):
             self.shoot_cooldown = self.shoot_delay
 
     def _shoot_single(self, groups):
-        projectile(self.rect.midtop, 0, groups)
+        projectile(resources.laser_image_path,16,32,self.rect.midtop, 0, groups)
 
     def _shoot_double(self, groups):
-        projectile(self.rect.midtop, 0, groups)
-        projectile((self.rect.left, self.rect.top), 0, groups)
+        projectile(resources.laser_image_path,16,32,self.rect.midtop, 0, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.left, self.rect.top), 0, groups)
 
     def _shoot_triple(self, groups):
-        projectile(self.rect.midtop, 0, groups)
-        projectile((self.rect.left, self.rect.top), -15, groups)
-        projectile((self.rect.right, self.rect.top), 15, groups)
+        projectile(resources.laser_image_path,16,32,self.rect.midtop, 0, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.left, self.rect.top), -15, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.right, self.rect.top), 15, groups)
 
     def _shoot_six(self, groups):
-        projectile(self.rect.midtop, 0, groups)
-        projectile((self.rect.midtop[0] + 10, self.rect.midtop[1]), 0, groups)
-        projectile((self.rect.left, self.rect.top), -15, groups)
-        projectile((self.rect.left + 10, self.rect.top), -15, groups)
-        projectile((self.rect.right, self.rect.top), 15, groups)
-        projectile((self.rect.right - 10, self.rect.top), 15, groups)
+        projectile(resources.laser_image_path,16,32,self.rect.midtop, 0, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.midtop[0] + 10, self.rect.midtop[1]), 0, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.left, self.rect.top), -15, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.left + 10, self.rect.top), -15, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.right, self.rect.top), 15, groups)
+        projectile(resources.laser_image_path,16,32,(self.rect.right - 10, self.rect.top), 15, groups)
 
     def reset_upgrade(self):
         self.upgrade_level = 0

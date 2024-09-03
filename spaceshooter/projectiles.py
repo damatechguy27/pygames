@@ -6,16 +6,15 @@ import math
 
 
 class projectile(pygame.sprite.Sprite):
-    def __init__(self, position, angle, groups):
+    def __init__(self, image_path, image_width, image_height, position, angle, groups):
         super().__init__(groups)
 
         # Lasers stuff
         # Loading Laser image
-        laser_image_path = join('resources','projectiles','Laser_Small.png')
+        laser_image_path = image_path
         # Getting meteor image size
         laser_image = pygame.image.load(laser_image_path).convert_alpha()
-        laser_width, laser_height = 16, 32
-        laser_image_size = pygame.transform.scale(laser_image,(laser_width, laser_height))
+        laser_image_size = pygame.transform.scale(laser_image,(image_width, image_height))
 
         self.image = laser_image_size
         self.rect = self.image.get_frect(midbottom = position)

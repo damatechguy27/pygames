@@ -4,31 +4,12 @@ from os.path import join
 from general_settings import WINDOW_HEIGHT, WINDOW_WIDTH
 from random import uniform, randint
 import random
+import resources
 #from globals import all_sprites
 
 class meteors(pygame.sprite.Sprite):
     def __init__(self, position, *groups):
         super().__init__(*groups)
-
-        
-        # Meteors stuff
-        # # Loading meteor image
-        # meteor_image_path = join('resources','meteors','sm_meteor.png')
-        # # Getting meteor image size
-        # meteor_image = pygame.image.load(meteor_image_path).convert_alpha()
-        # meteor_width, meteor_height = 52, 56
-        # meteor_image_size = pygame.transform.scale(meteor_image,(meteor_width, meteor_height))
-
-        
-        # self.image = meteor_image_size
-        # self.rect = self.image.get_frect(center = position)
-        # self.mask = pygame.mask.from_surface(self.image)
-
-        # # rotate meteors 
-        # #self.image = pygame.transform.rotate(self.image, )
-        # self.original_image = meteor_image_size
-        # self.rotation = 0
-        # self.rotation_spd = randint(100,200)
 
         # handles how long meteor is alive before being destroyed automatically
         self.start_time = pygame.time.get_ticks()
@@ -63,6 +44,29 @@ class meteors(pygame.sprite.Sprite):
         # destroy meteor after it leaves the screen 
         if pygame.time.get_ticks() - self.start_time >= self.lifetime:
             self.kill()
+
+class Meteor(meteors):
+    def __init__(self, image_path, image_width, image_height, score_val, hitvalue, position, *groups):
+        super().__init__(position, *groups)
+        # Loading meteor image
+        meteor_image_path = image_path
+        # Getting meteor image size
+        meteor_image = pygame.image.load(meteor_image_path).convert_alpha()
+        meteor_image_size = pygame.transform.scale(meteor_image,(image_width, image_height))
+
+        self.hitpoint = hitvalue
+        self.point_value = score_val
+        self.image = meteor_image_size
+        self.rect = self.image.get_frect(center = position)
+        self.mask = pygame.mask.from_surface(self.image)
+
+        # rotate meteors 
+        #self.image = pygame.transform.rotate(self.image, )
+        self.original_image = meteor_image_size
+        self.rotation = 0
+        self.rotation_spd = randint(100,200)
+
+
 
 class smallMeteor(meteors):
     def __init__(self, position, *groups):
@@ -131,8 +135,9 @@ class LargeMeteor(meteors):
         self.rotation = 0
         self.rotation_spd = randint(100,200)
 
-
 # Randomly select a meteor and spawns it
+#sm_meteor = Meteor(resources.sm_meteor_image_path,52, 56,100,1)
+
 def create_meteor(position, *groups):
     meteor_type = [smallMeteor, MediumMeteor, LargeMeteor]
     weights = [0.5,0.3,0.2]
